@@ -1,3 +1,3 @@
 #include <stdint.h>
 
-int32_t main() { return 0; }
+int32_t main(void) { return 0; }

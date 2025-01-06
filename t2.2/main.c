@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-int32_t main() {
+int32_t main(void) {
   int8_t a = -50;
   uint8_t b = 200;
   uint16_t b2 = 500;
