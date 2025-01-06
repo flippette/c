@@ -1,1 +1,3 @@
-int main() { return 0; }
+#include <stdint.h>
+
+int32_t main() { return 0; }
