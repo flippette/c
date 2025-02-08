@@ -32,11 +32,9 @@ uint8_t op_bit_get_sequence(uint32_t data, uint32_t mask) {
   uint8_t i = 0;
 
   while (mask) {
-    // shr is used later to shift data and mask to the right, and we need to
-    // shift one more if the LSb of the mask is a 1
     uint8_t shr = mask & 1;
-    if (shr)
-      out |= (data & 1) << i++;
+    out |= (data & shr) << i;
+    i += shr;
 
     // skip all zeros
     //
