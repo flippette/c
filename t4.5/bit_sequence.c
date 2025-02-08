@@ -27,15 +27,25 @@
  * The extracted sequence stored in a single unsigned char.
  *
  */
-
 uint8_t op_bit_get_sequence(uint32_t data, uint32_t mask) {
   uint8_t out = 0;
+  uint8_t i = 0;
 
-  for (uint8_t i = 0, shr = 0; i < 8 && shr < 32; data >>= 1, mask >>= 1, ++shr)
-    if (mask & 1) {
-      out |= (data & 1) << i;
-      ++i;
-    }
+  while (mask) {
+    // shr is used later to shift data and mask to the right, and we need to
+    // shift one more if the LSb of the mask is a 1
+    uint8_t shr = mask & 1;
+    if (shr)
+      out |= (data & 1) << i++;
+
+    // skip all zeros
+    //
+    // __builtin_ctz has UB if mask is 0, however that's already checked in the
+    // while loop
+    shr += __builtin_ctz(mask);
+    data >>= shr;
+    mask >>= shr;
+  }
 
   return out;
 }
