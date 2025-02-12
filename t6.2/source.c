@@ -31,7 +31,7 @@ int *create_dyn_array(unsigned int n) {
  * \return A pointer to the resized array
  */
 int *add_dyn_array(int *arr, unsigned int num, int newval) {
-  int *re = realloc(arr, num * sizeof(int));
+  int *re = realloc(arr, (num + 1) * sizeof(int));
   if (!re)
     return re;
   re[num] = newval;
